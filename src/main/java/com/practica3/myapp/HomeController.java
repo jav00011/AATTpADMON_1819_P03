@@ -41,9 +41,9 @@ public class HomeController {
 	@RequestMapping(value = "/ComprobarUsuario", method = RequestMethod.POST)
 	public String servlet1(HttpServletRequest request, @RequestParam("user") String user,@RequestParam("nif") String nif,HttpServletRequest req,Locale locale, Model model) {
 		
-		HttpSession sesion = request.getSession();
+		HttpSession sesion = request.getSession(); //Generamos una sesion o accedemos a una existente
 		
-		if(dao.ComprobarUsuario(user,nif)!=null){
+		if(dao.ComprobarUsuario(user,nif)!=null){ //Comprobamos que existe en nuestra BBDD un registro con los parametros user y nif introducidos. Si exite entramos en el if
 			 
 			
 				Usuario u=dao.ComprobarUsuario(user,nif);
