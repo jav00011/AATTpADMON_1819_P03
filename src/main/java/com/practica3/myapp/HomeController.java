@@ -46,15 +46,16 @@ public class HomeController {
 		if(dao.ComprobarUsuario(user,nif)!=null){ //Comprobamos que existe en nuestra BBDD un registro con los parametros user y nif introducidos. Si exite entramos en el if
 			 
 			
-				Usuario u=dao.ComprobarUsuario(user,nif);
-		        sesion.setAttribute("nombreusuario", u);
+			//Todo esto se realiza para guardar objetos en una sesión y mostrarlo posteriormente en un JSP
+			Usuario u=dao.ComprobarUsuario(user,nif);
+		        sesion.setAttribute("nombreusuario", u);//Se asigna el objeto con un nombre como un atributo en la sesion
 		        request.setAttribute("nombreusuario", u);
 			
 		        
-		        return "MostrarDatosUsuario";
+		        return "MostrarDatosUsuario"; //Mostramos informacion sobre el usuario buscado
 	}
 		
-		else return "NoExisteUsuario"; 
+		else return "NoExisteUsuario"; //Nos manda a una vista para leer tarjerta DNI y registrar nuevo usuario
 	}
 	
 	@RequestMapping(value = "/RegistrarNuevoUsuario", method = RequestMethod.POST)
@@ -64,7 +65,7 @@ public class HomeController {
 	    Usuario dat=datos.LeerNIF();
 		//Se coge primera letra del nombre, primer apellido y segunda letra del apellido
 	    String NombreUsuario = dat.getNombre().substring(0,1)+ dat.getApellido1()+dat.getApellido2().substring(0,1); //Utilizamos este comando para montar nombre de usuario tal como se indica en indice
-		   NombreUsuario=NombreUsuario.toLowerCase();
+		   NombreUsuario=NombreUsuario.toLowerCase(); //Se pasa el nombre de usuario obtenido todo a minuscula, como se dice en la practica
 	    
 	   dat.setUser(NombreUsuario);
 	    
